@@ -33,6 +33,7 @@ function app(people) {
             break;
         default:
             // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
+            alert("Please try again.");
             app(people);
             break;
     }
@@ -64,14 +65,17 @@ function mainMenu(person, people) {
         case "info":
             let personInfo = displayPerson(person[0]);
             alert(personInfo);
+            mainMenu(person, people);
             break;
         case "family":
             let personFamily = findPersonFamily(person[0], people);
             alert(personFamily);
+            mainMenu(person, people);
             break;
         case "descendants":
             let personDescendants = findPersonDescendants(person[0], people);
             alert(personDescendants);
+            mainMenu(person, people);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -80,6 +84,7 @@ function mainMenu(person, people) {
         case "quit":
             // Stop application execution
             return;
+            break;
         case "test":
 
             break;
