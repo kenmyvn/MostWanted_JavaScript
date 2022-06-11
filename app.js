@@ -74,7 +74,7 @@ function mainMenu(person, people) {
             break;
         case "descendants":
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            alert(displayPeople(personDescendants));
             mainMenu(person, people);
             break;
         case "restart":
@@ -255,8 +255,22 @@ function findPersonFamily(person, people) {
   return foundPersonFamily;
 }
 
-function findPersonDescendants(person, people) {
+function findDescendant(person, people) {
+    let foundDescendant = people.filter(function (descendant) {
+        for(let i = 0; i < descendant.parents.length; i ++)
+            if(descendant.parents[i] == person.id ) {
+                return true;
+        }
+    });
+    return foundDescendant
+}
 
+function findPersonDescendants(person, people) {
+    let descendants = findDescendant(person, people);
+    for(let i = 0; i < descendants.length; i++) {
+        descendants = descendants.concat(findPersonDescendants(descendants[i], people));
+    }
+    return descendants;
 }
 
 function searchByGender(people) {
