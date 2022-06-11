@@ -210,11 +210,44 @@ function findPersonParents(person, people) {
 }
 
 function findPersonSiblings(person, people) {
-
+    let foundPersonSiblings = people.filter(function (person) {
+        for (let i = 0; i < (person.parents).length; i++) {
+            if(person == person) {
+                return false;
+            };
+            if(person.parents.includes(person.parents[i]) ) {
+                return true;
+            };
+        };
+    });
+    return foundPersonSiblings[0];
 }
 
 function findPersonFamily(person, people) {
-  
+  let foundPersonFamily = [];
+  let spouse = foundPersonSpouse(person, people);
+  let parents = foundPersonParents(person, people);
+  let siblings = foundPersonSiblings(person, people);
+
+  if (spouse != null) {
+      for(let i = 0; i < spouse.length; i ++){
+          foundPersonFamily.push(spouse[i]);
+      }
+  }
+
+  if (parents != null) {
+      for(let i = 0; i < parents.length; i ++){
+          foundPersonFamily.push(parents[i]);
+      }
+  }
+
+  if (siblings != null) {
+      for(let i = 0; i <siblings.length; i ++){
+          foundPersonFamily.push(siblings[i]);
+      }
+  }
+
+  return foundPersonFamily;
 }
 
 function findPersonDescendants(person, people) {
