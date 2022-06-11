@@ -29,8 +29,6 @@ function app(people) {
             searchResults = searchByName(people);
             break;
         case "no":
-            //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
-                //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
             searchResults = searchByTraits(people);
             break;
         default:
@@ -72,8 +70,6 @@ function mainMenu(person, people) {
             alert(personFamily);
             break;
         case "descendants":
-            //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
-            // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
             alert(personDescendants);
             break;
@@ -190,15 +186,49 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 
+function findPersonSpouse(person, people) {
+
+}
+
+function findPersonParents(person, people) {
+
+}
+
+function findPersonSiblings(person, people) {
+
+}
+
 function findPersonFamily(person, people) {
-    let result = []
-    more text here lol
+  
 }
 
-function searchTrait(trait, value[trait], people) {
+function findPersonDescendants(person, people) {
 
 }
 
+function searchByGender(people) {
+
+}
+
+function searchByDOB(people) {
+    
+}
+
+function searchByHeight(people) {
+    
+}
+
+function searchByWeight(people) {
+    
+}
+
+function searchByEyeColor(people) {
+    
+}
+
+function searchByOccupation(people) {
+    
+}
 
 function searchByTraits(people) {
 
