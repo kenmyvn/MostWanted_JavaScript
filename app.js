@@ -191,8 +191,21 @@ function chars(input) {
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
+
+function getFamily(person, people) {
+    let allFamily = {};
+    let spouse = searchByTraits("currentSpouse", person.id, people)[0];
+    if (spouse) {
+        allFamily.currentSpouse = spouse.firstName + " " + spouse.lastName;
+    }
+    allFamily.parents = [];
+    return allFamily;
+}
+
 function findPersonFamily(person, people) {
+    let result = getFamily(person, people);
     let personFamily = {spouse: "", parents: ""};
-    personFamily.spouse = `Spouse: ${person.currentSpouse || "None"}\n`;
-    personFamily.parents = `Parents: ${person.parents}\n`;
+    personFamily.spouse = `Spouse: ${result.currentSpouse || "None"}\n`;
+    personFamily.parents = `Parents: ${result.parents.length > 0 ? [...result.parents] : "None"}\n`;
+    return personFamily;
 }
