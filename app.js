@@ -274,14 +274,32 @@ function findPersonDescendants(person, people) {
 }
 
 function searchByGender(people) {
-
+    let inputGender = prompt("What is the person's gender?").toLowerCase();
+    while (inputGender !== 'male' && inputGender !== 'female') {
+        alert("Please try again.");
+        inputGender = prompt("What is the person's gender?").toLowerCase();
+    }
+    let foundGender = people.filter(function (gender) {
+        if(gender.gender === inputGender) {
+            return true;  
+        }
+    });
+    return foundGender;
 }
 
 function searchByDOB(people) {
-    
+    let inputDOB = prompt("What is the person's date of birth? Enter as --/--/----");
+    let foundDOB = people.filter(function (dob) {
+        if(dob.dob === inputDOB) {
+            return true;
+        }
+    });
+    return foundDOB
 }
 
 function searchByHeight(people) {
+    let inputHeight = prompt("What is the person's height?");
+
     
 }
 
@@ -298,5 +316,37 @@ function searchByOccupation(people) {
 }
 
 function searchByTraits(people) {
-
+    let searchChoice = promptFor("What do you already know? Their 'gender', 'date of birth', 'height', 'weight', 'eye color', or 'occupation'?", chars).toLowerCase();
+    let person;
+    let filtered;
+    switch(searchChoice) {
+        case "gender":
+            filtered = searchByGender(people);
+            alert(displayPeople(filtered));
+            break;
+        case "date of birth":
+            filtered = searchByDOB(people);
+            alert(displayPeople(filtered));
+            break;
+        case "height":
+            filtered = searchByHeight(people);
+            alert(displayPeople(filtered));
+            break;
+        case "weight":
+            filtered = searchByWeight(people);
+            alert(displayPeople(filtered));
+            break;
+        case "eye color":
+            filtered = searchByEyeColor(people);
+            alert(displayPeople(filtered));
+            break;
+        case "occupation":
+            filtered = searchByOccupation(people);
+            alert(displayPeople(filtered));
+            break;
+        default:
+            alert("Please try again.");
+            return searchByTraits(people);
+    }   
+        searchChoice
 }
