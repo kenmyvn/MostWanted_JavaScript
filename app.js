@@ -69,7 +69,7 @@ function mainMenu(person, people) {
             break;
         case "family":
             let personFamily = findPersonFamily(person[0], people);
-            alert(personFamily);
+            alert(displayPeople(personFamily));
             mainMenu(person, people);
             break;
         case "descendants":
@@ -190,10 +190,15 @@ function chars(input) {
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
+function displayPeople(people){
+    return people.map(function(person){
+        return person.firstName+ " " + person.lastName;
+    }).join("\n");
+}
 
 function findPersonSpouse(person, people) {
-    let foundSpouse = people.filter(function (person) {
-        if (person.currentSpouse == person.id) {
+    let foundSpouse = people.filter(function (spouse) {
+        if (person.currentSpouse == spouse.id) {
             return true;
         }
     });
@@ -201,8 +206,8 @@ function findPersonSpouse(person, people) {
 }
 
 function findPersonParents(person, people) {
-    let foundPersonParents = people.filter(function (person) {
-        if ((person.parents).includes(person.id)) {
+    let foundPersonParents = people.filter(function (parent) {
+        if ((person.parents).includes(parent.id)) {
             return true;
         }
     });
@@ -210,12 +215,12 @@ function findPersonParents(person, people) {
 }
 
 function findPersonSiblings(person, people) {
-    let foundPersonSiblings = people.filter(function (person) {
-        for (let i = 0; i < (person.parents).length; i++) {
-            if(person == person) {
+    let foundPersonSiblings = people.filter(function (sibling) {
+        for (let i = 0; i < (sibling.parents).length; i++) {
+            if(person == sibling) {
                 return false;
             };
-            if(person.parents.includes(person.parents[i]) ) {
+            if(person.parents.includes(sibling.parents[i]) ) {
                 return true;
             };
         };
@@ -225,9 +230,9 @@ function findPersonSiblings(person, people) {
 
 function findPersonFamily(person, people) {
   let foundPersonFamily = [];
-  let spouse = foundPersonSpouse(person, people);
-  let parents = foundPersonParents(person, people);
-  let siblings = foundPersonSiblings(person, people);
+  let spouse = findPersonSpouse(person, people);
+  let parents = findPersonParents(person, people);
+  let siblings = findPersonSiblings(person, people);
 
   if (spouse != null) {
       for(let i = 0; i < spouse.length; i ++){
