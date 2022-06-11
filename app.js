@@ -146,7 +146,7 @@ function displayPerson(person) {
     personInfo += `Weight: ${person.weight}\n`;
     personInfo += `Eye Color: ${person.eyeColor}\n`;
     personInfo += `Occupation: ${person.occupation}\n`;
-    alert(personInfo);
+    alert(personInfo).join("\n");
 }
 // End of displayPerson()
 
@@ -192,11 +192,21 @@ function chars(input) {
 
 
 function findPersonSpouse(person, people) {
-
+    let foundSpouse = people.filter(function (person) {
+        if (person.currentSpouse == person.id) {
+            return true;
+        }
+    });
+    return foundSpouse;
 }
 
 function findPersonParents(person, people) {
-
+    let foundPersonParents = people.filter(function (person) {
+        if ((person.parents).includes(person.id)) {
+            return true;
+        }
+    });
+    return foundPersonParents;
 }
 
 function findPersonSiblings(person, people) {
