@@ -299,25 +299,48 @@ function searchByDOB(people) {
 
 function searchByHeight(people) {
     let inputHeight = prompt("What is the person's height?");
-
-    
+    let foundHeight = people.filter(function (height) {
+        if(height.height === inputHeight) {
+            return true;
+        }
+    });
+    return foundHeight
 }
 
 function searchByWeight(people) {
-    
+    let inputWeight = prompt("What is the person's weight?");
+    let foundWeight = people.filter(function (weight) {
+        if (weight.weight === inputWeight) {
+            return true;
+        }
+    });
+    return foundWeight
 }
 
 function searchByEyeColor(people) {
-    
+    let inputEyeColor = prompt("What is the person's eye color?");
+    let foundEyeColor = people.filter(function (eyeColor) {
+        if (eyeColor.eyeColor === inputEyeColor) {
+            return true;
+        }
+    });
+    return foundEyeColor
 }
 
 function searchByOccupation(people) {
+    let inputOccupation = prompt("What is the person's occupation?");
+    let foundOccupation = people.filter(function (occupation) {
+        if (occupation.occupation === inputOccupation) {
+            return true;
+        }
+    });
+    return foundOccupation
     
 }
 
 function searchByTraits(people) {
     let searchChoice = promptFor("What do you already know? Their 'gender', 'date of birth', 'height', 'weight', 'eye color', or 'occupation'?", chars).toLowerCase();
-    let person;
+    let foundPerson;
     let filtered;
     switch(searchChoice) {
         case "gender":
@@ -348,5 +371,20 @@ function searchByTraits(people) {
             alert("Please try again.");
             return searchByTraits(people);
     }   
-        searchChoice
+        searchChoice = prompt("Is there something else you already know? Please input 'yes' or 'no'.");
+        while (searchChoice !== 'yes' && searchChoice !== 'no') {
+            alert("Please try again.");
+            searchChoice = prompt("Is there something else you already know? Please input 'yes' or 'no'.");
+        }
+        if(searchChoice === "yes"){
+            searchByTraits(filtered, people);
+        }
+        if(searchChoice === "no" && filtered.length === 1) {
+            foundPerson = filtered[0];
+            mainMenu(foundPerson, people);
+        }
+        if (searchChoice === "no" && filtered.length > 1 ) {
+            alert("Your search resulted in \n\n" + displayPeople(filtered) +"\n\n Happy searching.");
+            app(people);
+        }
 }
